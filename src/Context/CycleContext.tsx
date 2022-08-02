@@ -38,6 +38,9 @@ export function CycleProvider({ children }: ICycleProvider) {
     }
   })
 
+  const { cycles, activeCycleId } = stateCycles
+  const activeCycle = cycles.find(cycle => cycle.id === activeCycleId)
+
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
     if (activeCycle) {
       return differenceInSeconds(new Date(), new Date(activeCycle.startDate))
@@ -45,9 +48,6 @@ export function CycleProvider({ children }: ICycleProvider) {
 
     return 0
   })
-
-  const { cycles, activeCycleId } = stateCycles
-  const activeCycle = cycles.find(cycle => cycle.id === activeCycleId)
 
   useEffect(() => {
     const stateJSON = JSON.stringify(stateCycles)
